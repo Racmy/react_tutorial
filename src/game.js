@@ -1,4 +1,5 @@
 import React from "react";
+import "./game.css";
 
 class Square extends React.Component {
   render() {
@@ -16,7 +17,7 @@ class Board extends React.Component {
       <div>
         <div className="status">{status}</div>
         <div className="board-row">
-          {this.renderSquare(0)}
+          {this.renderSquare(1)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
         </div>

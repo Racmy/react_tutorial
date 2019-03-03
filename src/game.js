@@ -10,19 +10,32 @@ class Square extends React.Component {
     }
     render() {
         return (
-            <button
-                className="square"
-                onClick={() => this.setState({ value: 'X' })}
-            >
-                {this.state.value}
+            <button className="square" onClick={() => this.props.onClick()}>
+                {this.props.value}
             </button>
         )
     }
 }
 
 class Board extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            squares: Array(9).fill(null),
+        }
+    }
+    handleClick(num) {
+        const squares = this.state.squares.slice()
+        squares[num] = 'X'
+        this.setState({ squares: squares })
+    }
     renderSquare(num) {
-        return <Square value={num} />
+        return (
+            <Square
+                value={this.state.squares[num]}
+                onClick={() => this.handleClick(num)}
+            />
+        )
     }
     render() {
         const status = 'Next player: X'

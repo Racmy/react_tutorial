@@ -1,20 +1,20 @@
 import React from 'react'
 import './game.css'
 
-class Square extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            value: null,
-        }
-    }
-    render() {
-        return (
-            <button className="square" onClick={() => this.props.onClick()}>
-                {this.props.value}
-            </button>
-        )
-    }
+function Square(props) {
+    // constructor() {
+    //     super()
+    //     this.state = {
+    //         value: null,
+    //     }
+    // }
+
+    return (
+        <button className="square" onClick={() => props.onClick()}>
+            {props.value}
+        </button>
+    )
+    
 }
 
 class Board extends React.Component {
@@ -22,12 +22,17 @@ class Board extends React.Component {
         super()
         this.state = {
             squares: Array(9).fill(null),
+            xIsNext:true,//x's turn: ture
         }
     }
     handleClick(num) {
         const squares = this.state.squares.slice()
-        squares[num] = 'X'
-        this.setState({ squares: squares })
+        squares[num] = this.state.xIsNext ? 'X':'O'
+        this.setState({
+            squares: squares,
+            xIsNext:!this.state.xIsNext,
+        })
+        
     }
     renderSquare(num) {
         return (
